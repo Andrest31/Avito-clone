@@ -7,6 +7,7 @@ WORKDIR /app
 # Копируем package.json и устанавливаем зависимости
 COPY package.json package-lock.json ./
 RUN npm install
+RUN npm install react-router-dom
 
 # Копируем весь код проекта
 COPY . .
