@@ -1,7 +1,7 @@
 {
   "name": "avito-clone-api",
   "version": "1.0.0",
-  "description": "Simple API for managing items",
+  "description": "Simple API for managing items", 
   "main": "app.js",
   "scripts": {
     "start": "node app.js"

@@ -1,23 +1,19 @@
-# Используем Node.js 20
-FROM node:20
+FROM node:18-alpine
 
 # Устанавливаем рабочую директорию
 WORKDIR /app
 
-# Копируем package.json и package-lock.json перед установкой зависимостей
-COPY package.json package-lock.json ./
+# Копируем package.json и package-lock.json (если есть)
+COPY package*.json ./
 
-# Удаляем кеш NPM и устанавливаем зависимости
-RUN npm cache clean --force && npm install
+# Устанавливаем зависимости
+RUN npm install --only=production
 
-# Копируем весь код сервера
+# Копируем исходный код
 COPY . .
 
-# Открываем порт 5000
-EXPOSE 5000
+# Указываем порт, который будет использоваться в контейнере
+EXPOSE 3000
 
-# Проверяем, есть ли node_modules перед запуском
-RUN ls -la && ls node_modules
-
-# Запускаем сервер
+# Запуск приложения
 CMD ["npm", "start"]
