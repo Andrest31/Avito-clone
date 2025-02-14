@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import Header from "../../components/header/header";
+import './ListPage.css'
+import ListCard from "../../components/ListCard/ListCard"
 
 // Тип объявления
 interface Item {
@@ -36,9 +39,17 @@ const ListPage: React.FC = () => {
   });
 
   return (
-    <div>
+    <div className="ListPage">
+        <Header>
+            
+        </Header>
+
       <h1>Список объявлений</h1>
 
+        <div className="list-block">
+        <ListCard></ListCard>
+        <ListCard></ListCard>
+        </div>
       {/* Фильтр по категории */}
       <select onChange={(e) => setSelectedCategory(e.target.value)} value={selectedCategory}>
         {categories.map((cat) => (

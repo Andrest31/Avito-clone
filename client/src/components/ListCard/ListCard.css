@@ -1,0 +1,22 @@
+.ListCard{
+    display: flex;
+    padding: 20px 20px;
+    border: 2px black solid;
+    border-radius: 20px;
+    margin-bottom: 10px;
+    position: relative;
+}
+
+.left-info{
+    display: block;
+}
+.right-button{
+    align-content: center;
+    margin-right: 0;
+    right: 200px;
+}
+.open{
+    background-color: rgb(21, 222, 21);
+    border: none;
+    padding: 10px 15px;
+}

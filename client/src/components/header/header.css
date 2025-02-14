@@ -1,0 +1,48 @@
+.header{
+    width: 1350px;
+    height: 75px;
+    align-items: center;
+    align-content: center;
+    margin-top: 15px;
+    display: flex;
+    border-top: rgb(214, 212, 212) 1px solid;
+}
+.AvitoLogo{
+    margin-right: 50px;
+    font-size: 28px;
+}
+.AllCategoriesButton{
+    align-content: center;
+    margin-right: 7px;
+    padding: 12px 16px;
+    font-size: 16px;
+    border-radius: 10px;
+    background-color: #ebeae8;
+    cursor: pointer;
+}
+.searchInput{
+    background-color: #ebeae8;
+    border: none;
+    padding: 12px 16px;
+    font-size: 16px;
+    border-radius: 10px;
+    width: 670px;
+    margin-right: 7px;
+}
+.Submit{
+    background-color: black;
+    color: white;
+    border: none;
+    padding: 12px 16px;
+    font-size: 16px;
+    border-radius: 10px;
+    margin-right: 70px;
+    cursor: pointer;
+
+}
+.AddOne{
+    font-size: 16px;
+    border: none;
+    background-color: white;
+    cursor: pointer;
+}
