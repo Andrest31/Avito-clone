@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Header from "../../components/header/header";
-import './ListPage.css'
-import ListCard from "../../components/ListCard/ListCard"
+import "./ListPage.css";
+import ListCard from "../../components/ListCard/ListCard";
 
 // Тип объявления
 interface Item {
@@ -22,11 +22,14 @@ const ListPage: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("Все");
 
-  // Имитация запроса на сервер
+  // Запрос данных с сервера при загрузке
   useEffect(() => {
     fetch("http://localhost:3000/items")
       .then((res) => res.json())
-      .then((data) => setItems(data))
+      .then((data) => {
+        console.log("Полученные данные:", data); // 🔹 Вывод в консоль
+        setItems(data);
+      })
       .catch((err) => console.error("Ошибка загрузки:", err));
   }, []);
 
@@ -40,16 +43,15 @@ const ListPage: React.FC = () => {
 
   return (
     <div className="ListPage">
-        <Header>
-            
-        </Header>
+      <Header />
 
       <h1>Список объявлений</h1>
 
-        <div className="list-block">
-        <ListCard></ListCard>
-        <ListCard></ListCard>
-        </div>
+      <div className="list-block">
+        <ListCard />
+        <ListCard />
+      </div>
+
       {/* Фильтр по категории */}
       <select onChange={(e) => setSelectedCategory(e.target.value)} value={selectedCategory}>
         {categories.map((cat) => (
