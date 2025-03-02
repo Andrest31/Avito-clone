@@ -50,3 +50,6 @@
     background-color: white;
     cursor: pointer;
 }
+.AddOne:hover{
+    color: #00aaff;
+}
