@@ -4,7 +4,7 @@
         return (
             <div className="ListCard">
                 <div className="left-block">
-                    <img src="../../../public/img/2.jpg" alt="" className="left-img" />
+                    <img src="../../../img/2.jpg" alt="" className="left-img" />
                     <div className="left-info">
                         <div className="info-name-str">Полуось задней оси мерседеса</div>
                         <div className="info-price-str">14 000 ₽</div>

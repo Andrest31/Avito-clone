@@ -24,7 +24,7 @@ const ListPage: React.FC = () => {
 
   // Запрос данных с сервера при загрузке
   useEffect(() => {
-    fetch("http://localhost:3000/items")
+    fetch("http://localhost:5000/items")
       .then((res) => res.json())
       .then((data) => {
         console.log("Полученные данные:", data); // 🔹 Вывод в консоль
@@ -32,6 +32,7 @@ const ListPage: React.FC = () => {
       })
       .catch((err) => console.error("Ошибка загрузки:", err));
   }, []);
+  
 
   // Фильтрация объявлений
   const filteredItems = items.filter((item) => {
