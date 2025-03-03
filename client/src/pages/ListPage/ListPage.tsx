@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import Header from "../../components/header/header";
 import "./ListPage.css";
 import ListCard from "../../components/ListCard/ListCard";
@@ -7,11 +6,15 @@ import ListCard from "../../components/ListCard/ListCard";
 // Тип объявления
 interface Item {
   id: number;
-  name: string;
+  title: string;
   description: string;
   location: string;
-  type: string;
+  costs: string;
+  category: string;
+  firma: string;
   image?: string; // Опциональное поле для фото
+  full_name: string;
+  rating: number;
 }
 
 // Варианты категорий
@@ -32,13 +35,12 @@ const ListPage: React.FC = () => {
       })
       .catch((err) => console.error("Ошибка загрузки:", err));
   }, []);
-  
 
   // Фильтрация объявлений
   const filteredItems = items.filter((item) => {
     return (
-      (selectedCategory === "Все" || item.type === selectedCategory) &&
-      item.name.toLowerCase().includes(searchQuery.toLowerCase())
+      (selectedCategory === "Все" || item.category === selectedCategory) &&
+      item.title.toLowerCase().includes(searchQuery.toLowerCase())
     );
   });
 
@@ -49,8 +51,14 @@ const ListPage: React.FC = () => {
       <h1>Список объявлений</h1>
 
       <div className="list-block">
-        <ListCard />
-        <ListCard />
+        {/* Пройдем по отфильтрованным объявлениям и передадим их в компонент ListCard */}
+        {filteredItems.length > 0 ? (
+          filteredItems.map((item) => (
+            <ListCard key={item.id} item={item} />
+          ))
+        ) : (
+          <p>Объявления не найдены</p>
+        )}
       </div>
 
       {/* Фильтр по категории */}
@@ -67,22 +75,6 @@ const ListPage: React.FC = () => {
         value={searchQuery}
         onChange={(e) => setSearchQuery(e.target.value)}
       />
-
-      {/* Отображение списка */}
-      <ul>
-        {filteredItems.length > 0 ? (
-          filteredItems.map((item) => (
-            <li key={item.id}>
-              <img src={item.image || "https://via.placeholder.com/100"} alt={item.name} width={100} />
-              <h3>{item.name}</h3>
-              <p>{item.location} - {item.type}</p>
-              <Link to={`/item/${item.id}`}>Открыть</Link>
-            </li>
-          ))
-        ) : (
-          <p>Объявления не найдены</p>
-        )}
-      </ul>
     </div>
   );
 };

@@ -1,27 +1,53 @@
-    import './ListCard.css'
+import React from 'react';
+import './ListCard.css';
 
-    const ListCard = () => {
-        return (
-            <div className="ListCard">
-                <div className="left-block">
-                    <img src="../../../img/2.jpg" alt="" className="left-img" />
-                    <div className="left-info">
-                        <div className="info-name-str">Полуось задней оси мерседеса</div>
-                        <div className="info-price-str">14 000 ₽</div>
-                        <div className="info-firma-str">Mercedes</div>
-                        <div className="info-discr-str">Рады приветствовать вас! Наш Часовой сервис при часовом ломбарде, готов предложить различные услуги, а именно: Мы производим ремонт и обслуживание часов любой сложности, Полировку корпусов и браслетов с восстановлением </div>
-                        <div className="info-category-str">Запчасти</div>
-                    </div>
-                </div>
-                <div className="right-button">
-                    <div className="seller-info">
-                        <div className="seller-name">Сергиево-Посадский завод</div>
-                        <div className="seller-rating">4.7</div>
-                    </div>
-                    <button className="open">Открыть</button>
-                </div>
-            </div>
-        )
-    }
+interface ListCardProps {
+  item: {
+    id: number;
+    title: string;
+    description: string;
+    location: string;
+    category: string;
+    image?: string;
+    firma: string;
+    full_name: string;
+    costs: string;
+    rating: number;
 
-    export default ListCard
+  };
+}
+
+const ListCard: React.FC<ListCardProps> = ({ item }) => {
+
+  return (
+    <div className="ListCard">
+      <div className="left-block">
+        <img
+          src={item.image || "../../../img/2.jpg"}
+          alt={item.title}
+          className="left-img"
+        />
+        <div className="left-info">
+          <div className="info-name-str">{item.title}</div>
+          <div className="info-price-str">{item.costs}</div> {/* Здесь нужна логика для отображения цены, если она есть */}
+          <div className="info-firma-str">{item.firma}</div>
+          <div className="info-discr-str">{item.description}</div>
+          <div className="info-category-str">{item.category}</div>
+        </div>
+      </div>
+      <div className="right-button">
+        <div className="seller-info">
+          <div className="seller-name">
+            {item.full_name}
+          </div> {/* Тут тоже нужно получать данные продавца */}
+          <div className="seller-rating">
+            {item.rating}
+          </div>
+        </div>
+        <button className="open">Открыть</button>
+      </div>
+    </div>
+  );
+};
+
+export default ListCard;

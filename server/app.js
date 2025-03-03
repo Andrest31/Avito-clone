@@ -37,8 +37,22 @@ app.use(bodyParser.json());
 app.get('/items', async (req, res) => {
   console.log('Получение всех объявлений');
   try {
-    const result = await client.query('SELECT * FROM ads');
-    console.log('Данные получены:', result.rows);
+    const result = await client.query(`
+      SELECT 
+        ads.id, 
+        ads.title, 
+        ads.description, 
+        ads.location,   
+        ads.category, 
+        ads.image_url, 
+        ads.firma, 
+        ads.costs,
+        users.full_name, 
+        users.rating 
+      FROM ads 
+      JOIN users ON ads.user_id = users.id;
+    `);
+        console.log('Данные получены!');
     res.json(result.rows);
   } catch (err) {
     console.error('Ошибка при получении данных из БД:', err);
