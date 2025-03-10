@@ -3,19 +3,34 @@ import "./header.css";
 
 interface HeaderProps {
   onSearch: (query: string) => void;
+  onCategoryChange: (category: string) => void;
 }
 
-const Header: React.FC<HeaderProps> = ({ onSearch }) => {
+const Header: React.FC<HeaderProps> = ({ onSearch, onCategoryChange }) => {
   const [inputValue, setInputValue] = useState("");
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [selectedCategory, setSelectedCategory] = useState("Все категории");
+
+  const categories = ["Все категории", "Авто", "Услуги", "Недвижимость"];
 
   const handleSearch = () => {
-    onSearch(inputValue); // Передаем значение в ListPage при нажатии кнопки
+    onSearch(inputValue);
   };
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === "Enter") {
       handleSearch();
     }
+  };
+
+  const toggleDropdown = () => {
+    setIsDropdownOpen(!isDropdownOpen);
+  };
+
+  const selectCategory = (category: string) => {
+    setSelectedCategory(category);
+    onCategoryChange(category);
+    setIsDropdownOpen(false);
   };
 
   return (
@@ -28,14 +43,29 @@ const Header: React.FC<HeaderProps> = ({ onSearch }) => {
           <path fill="#0AF" d="M 20.757 14.004 a 6.752 6.752 0 1 0 0 -13.504 a 6.752 6.752 0 0 0 0 13.504 Z"></path>
         </svg>
       </div>
-      <button className="AllCategoriesButton">Все категории</button>
+
+      <div className="category-dropdown">
+        <button className="AllCategoriesButton" onClick={toggleDropdown}>
+          {selectedCategory}
+        </button>
+        {isDropdownOpen && (
+          <ul className="dropdown-menu">
+            {categories.map((category) => (
+              <li key={category} onClick={() => selectCategory(category)}>
+                {category}
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
+
       <input
         type="text"
         className="searchInput"
         placeholder="Поиск"
         value={inputValue}
         onChange={(e) => setInputValue(e.target.value)}
-        onKeyDown={handleKeyDown} // Слушаем нажатие Enter
+        onKeyDown={handleKeyDown}
       />
       <button className="Submit" onClick={handleSearch}>Найти</button>
       <button className="AddOne">+ Разместить объявление</button>

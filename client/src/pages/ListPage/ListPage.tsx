@@ -21,8 +21,8 @@ interface Item {
 
 const ListPage: React.FC = () => {
   const [items, setItems] = useState<Item[]>([]);
-  const [searchQuery, setSearchQuery] = useState(""); // Будет обновляться только при поиске
-  const [selectedCategory, setSelectedCategory] = useState("Все");
+  const [searchQuery, setSearchQuery] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("Все категории");
   const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
@@ -34,12 +34,17 @@ const ListPage: React.FC = () => {
 
   const handleSearch = (query: string) => {
     setSearchQuery(query);
-    setCurrentPage(1); // Сбрасываем пагинацию при новом поиске
+    setCurrentPage(1);
+  };
+
+  const handleCategoryChange = (category: string) => {
+    setSelectedCategory(category);
+    setCurrentPage(1);
   };
 
   const filteredItems = items.filter(
     (item) =>
-      (selectedCategory === "Все" || item.category === selectedCategory) &&
+      (selectedCategory === "Все категории" || item.category === selectedCategory) &&
       item.title.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
@@ -48,7 +53,7 @@ const ListPage: React.FC = () => {
 
   return (
     <div className="ListPage">
-      <Header onSearch={handleSearch} />
+      <Header onSearch={handleSearch} onCategoryChange={handleCategoryChange} />
 
       <h1>Список объявлений</h1>
 
