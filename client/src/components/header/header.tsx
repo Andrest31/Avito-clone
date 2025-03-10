@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "./header.css";
+import AuthModal from "../authModal/authModal";
 
 interface HeaderProps {
   onSearch: (query: string) => void;
@@ -10,6 +11,7 @@ const Header: React.FC<HeaderProps> = ({ onSearch, onCategoryChange }) => {
   const [inputValue, setInputValue] = useState("");
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState("Все категории");
+  const [isAuthModalOpen, setAuthModalOpen] = useState(false);
 
   const categories = ["Все категории", "Авто", "Услуги", "Недвижимость"];
 
@@ -62,7 +64,9 @@ const Header: React.FC<HeaderProps> = ({ onSearch, onCategoryChange }) => {
       />
       <button className="Submit" onClick={handleSearch}>Найти</button>
       <button className="AddOne">+ Разместить объявление</button>
-      <button className="AddOne">Вход</button>
+      <button className="AddOne" onClick={() => setAuthModalOpen(true)}>Вход</button>
+      
+      <AuthModal isOpen={isAuthModalOpen} onClose={() => setAuthModalOpen(false)} />
     </div>
   );
 };
