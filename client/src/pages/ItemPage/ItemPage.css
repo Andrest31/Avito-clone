@@ -1,0 +1,56 @@
+.ItemPage{
+    margin: 0 85px;
+
+}
+.header{
+    display: flex;
+}
+.Cat{
+    margin-left: -40px;
+}
+.productTitle{
+    display: flex;
+    gap: 60px;
+}
+.rightBlock, .Price{
+    position: fixed;
+    margin-left: 680px;
+}
+
+.showEmail{
+    background-color: rgb(0, 194, 87);
+    font-size: 18px;
+    border-radius: 3px;
+    color: white;
+    width: 320px;
+    height: 66px;
+    margin-bottom: 20px;
+}
+.showEmail:hover{
+    background-color: rgb(5, 170, 79);
+
+}
+.sellerBlock{
+    display: block;
+}
+.sellerRate{
+    font-size: 14px;
+}
+.sellerName{
+    color: #00aaff;
+}
+.addTitle{
+    display: flex;
+    gap: 40px;
+}
+.addImage{
+    width: 620px;
+}
+.descrDescr{
+
+    width: 620px;
+}
+
+.SameAds{
+    margin-bottom: 200px;
+}

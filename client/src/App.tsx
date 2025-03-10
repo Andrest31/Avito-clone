@@ -11,7 +11,7 @@ function App() {
         <Route path="/" element={<Navigate to="/list" replace />} />
         <Route path="/form" element={<FormPage />} />
         <Route path="/list" element={<ListPage />} />
-        <Route path="/item/:id" element={<ItemPage />} />
+        <Route path="/item" element={<ItemPage />} />
         <Route path="*" element={<h1>404 - Страница не найдена</h1>} />
       </Routes>
     </Router>
