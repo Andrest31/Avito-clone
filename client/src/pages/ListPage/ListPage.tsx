@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Header from "../../components/header/header";
 import "./ListPage.css";
 import ListCard from "../../components/ListCard/ListCard";
-import Pagination from "../../components/Pagination/pagination"; // Импортируем пагинацию
+import Pagination from "../../components/Pagination/Pagination"; // Импортируем пагинацию
 
 const ITEMS_PER_PAGE = 9; // Количество объявлений на одной странице
 

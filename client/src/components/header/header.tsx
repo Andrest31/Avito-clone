@@ -9,6 +9,7 @@ const Header = () => {
         <input type="text" className="searchInput" placeholder='Поиск'/>
         <button className="Submit">Найти</button>
         <button className="AddOne">+ Разместить объявление</button>
+        <button className="AddOne">Вход</button>
     </div>
   );
 };
