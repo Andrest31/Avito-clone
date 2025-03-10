@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import Header from "../../components/header/header";
 import "./ListPage.css";
 import ListCard from "../../components/ListCard/ListCard";
-import Pagination from "../../components/Pagination/Pagination"; // Импортируем пагинацию
+import Pagination from "../../components/Pagination/Pagination";
 
-const ITEMS_PER_PAGE = 9; // Количество объявлений на одной странице
+const ITEMS_PER_PAGE = 9;
 
 interface Item {
   id: number;
@@ -16,42 +16,39 @@ interface Item {
   image?: string;
   full_name: string;
   rating: number;
-  costs: string; // Добавлено поле цены
+  costs: string;
 }
-
-//const categories = ["Все", "Недвижимость", "Авто", "Услуги"];
 
 const ListPage: React.FC = () => {
   const [items, setItems] = useState<Item[]>([]);
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [searchQuery, setSearchQuery] = useState("");
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [searchQuery, setSearchQuery] = useState(""); // Будет обновляться только при поиске
   const [selectedCategory, setSelectedCategory] = useState("Все");
   const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
     fetch("http://localhost:5000/items")
       .then((res) => res.json())
-      .then((data) => {
-        console.log("Полученные данные:", data);
-        setItems(data);
-      })
+      .then((data) => setItems(data))
       .catch((err) => console.error("Ошибка загрузки:", err));
   }, []);
 
-  // Фильтрация объявлений
-  const filteredItems = items.filter((item) => 
-    (selectedCategory === "Все" || item.category === selectedCategory) &&
-    item.title.toLowerCase().includes(searchQuery.toLowerCase())
+  const handleSearch = (query: string) => {
+    setSearchQuery(query);
+    setCurrentPage(1); // Сбрасываем пагинацию при новом поиске
+  };
+
+  const filteredItems = items.filter(
+    (item) =>
+      (selectedCategory === "Все" || item.category === selectedCategory) &&
+      item.title.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
-  // Подсчет страниц
   const totalPages = Math.ceil(filteredItems.length / ITEMS_PER_PAGE);
   const paginatedItems = filteredItems.slice((currentPage - 1) * ITEMS_PER_PAGE, currentPage * ITEMS_PER_PAGE);
 
   return (
     <div className="ListPage">
-      <Header />
+      <Header onSearch={handleSearch} />
 
       <h1>Список объявлений</h1>
 
@@ -63,10 +60,7 @@ const ListPage: React.FC = () => {
         )}
       </div>
 
-      {/* Пагинация */}
       {totalPages > 1 && <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={setCurrentPage} />}
-
-
     </div>
   );
 };
